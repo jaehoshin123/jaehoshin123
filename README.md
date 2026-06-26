@@ -1,157 +1,61 @@
-# Jaeho Shin
+# 신재호 (Jaeho Shin)
 
-[![GitHub](https://img.shields.io/badge/GitHub-jaehoshin123-181717?logo=github)](https://github.com/jaehoshin123)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jaeho%20Shin-0A66C2?logo=linkedin)](https://www.linkedin.com/in/jaeho-shin)
-[![Blog](https://img.shields.io/badge/Blog-Personal%20Blog-orange)](https://jaehoshin123.github.io)
-[![Email](https://img.shields.io/badge/Email-fluffyck%40naver.com-EA4335?logo=gmail)](mailto:fluffyck@naver.com)
+**전자기공학부 4학년** | 성균관대학교 (2022315911)  
+📧 jaeho@skku.edu | 🎓 2026년 8월 졸업 예정
 
 ---
 
-## Summary
+## 🎓 학력
 
-Passionate about intelligent systems, I aim to solve real-world problems by bridging electronic engineering, AI, and production software. My experience spans MCU-based control, autonomous systems, computer vision, and cloud-based AI services, with a focus on building reliable end-to-end systems from hardware to application.
-
----
-
-## Work Experience
-
-### MegazoneCloud &nbsp;`Jan 2025 – Mar 2025`
-- Developed a LangChain-based RAG chatbot starting from an internal document QA prototype, and extended it to support AWS official documentation leveraging SearXNG and Perplexica for retrieval.
-- Collaborated with a team lead using GitLab for version control and project management.
-- Conducted benchmarking of multiple open-source LLMs using Ollama to evaluate performance across different models.
-- Performed data quality validation for documents ingested into OpenSearch for the GenAI360 service, including chunking strategy optimization, embedding quality assessment, and LLM response accuracy evaluation.
-
-### NTT DATA &nbsp;`July 2024 – Aug 2024`
-- Conducted internal Generative AI training for the IT department at NTT Korea, introducing core pipelines and practical case studies as part of the transition beyond traditional DT initiatives.
+| 기간 | 학교 | 전공 |
+|------|------|------|
+| 2022.03 – 2026.08 | 성균관대학교 | 전자기공학부 |
 
 ---
 
-## Education
+개요
 
-| Period | Degree |
-|---|---|
-| 2024 – Present | B.E. in Electronic and Electric Engineering, **Sungkyunkwan University (SKKU)** (GPA: 3.9/4.5) |
-| 2015 – 2018 | Kyunggi High School |
+스마트팩토리 비전 검사 환경에서, 사전학습된 시각-언어 모델 CLIP을 추가 학습 없이 활용하여 자연어 텍스트로 임의 클래스를 지정하는 개방어휘 의미 분할(Open-Vocabulary Semantic Segmentation, OVSS) 시스템 ScopeCLIP을 구성하였다. CLIP 패치 특징의 inter-class correlation 문제를 SAM2 영역 마스크 기반의 두 연산으로 보완한다.
 
----
 
-## Certifications
+Scope Reconstruction (SR): SAM2 마스크를 patch grid로 변환하여 같은 영역 내 패치끼리만 어텐션이 일어나도록 마지막 어텐션의 softmax 직전에 타 영역 가중치를 −∞로 차단. CLS 토큰 행·열은 마스킹 제외하여 전역 표현 유지.
+Map Correction (MC): 풀해상도 예측맵에서 각 영역 내 화소 라벨을 최빈 라벨로 통일하여 고립 오분류 제거.
 
-| Category | Certification |
-|---|---|
-| AWS | AWS Certified Solutions Architect – Associate (SAA), AWS Certified AI Practitioner |
-| Data | SQLD, ADsP |
-| IT | Computer Specialist in Spreadsheet & Database Level-1 |
 
----
+마스크를 생성하는 SAM2 백본(Hiera-L vs. Hiera-Tiny)의 정확도–비용 trade-off를 7개 OVSS 벤치마크에서 정량 분석하여, 경량 백본의 현장 적용 가능성을 검증하였다.
 
-## Research Outputs
+개발 환경
 
-### Publications
+항목내용HardwareNVIDIA A100 80GB (단일 GPU)기반 모델CLIP ViT-B/16, SAM2 (Hiera-L / Hiera-Tiny)FrameworkPython, PyTorch, mmsegmentation데이터셋공개 OVSS 벤치마크 7종 (VOC20/21, PC59/60, COCO-Object/Stuff, ADE20K)마스크 생성points_per_side=8, pred-IoU·stability threshold=0.4, FP16, 마스크 병합 미사용
 
-| Title | Venue | Authors | Status |
-|---|---|---|---|
-| ScopeCLIP: Region-Mask Training-Free OVSS with Lightweight SAM2 | **ACCV 2026** | Kim Junghun, **Shin Jaeho**, Kim Kyuri, Lim Seoyeon, Jeong Jongpil | Submitted (2026/06/23) |
+정량 결과
 
-> **Abstract:** Vision–language models such as CLIP provide strong open vocabulary recognition, but turning them into spatially coherent per-patch predictions for open-vocabulary semantic segmentation (OVSS) remains difficult. Region-mask methods improve training-free OVSS by using class-agnostic region masks to restrict patch attention within a region (Scope Reconstruction, SR) and to enforce a single label per region by majority voting (Map Correction, MC). We study whether a much smaller mask backbone is a practical alternative to the large SAM2 Hiera-L (224.4M params). With Hiera-Tiny (38.9M, 5.8× fewer params), ScopeCLIP reaches 43.92 avg mIoU (95% of the Hiera-L score of 46.18), while lowering average end-to-end latency by ~22% and peak memory by ~0.35 GB across 7 OVSS benchmarks.
->
-> [[GitHub](https://github.com/KimJH0919/SCOPECLIP)] [[Conference](https://accv2026.org/)]
+모델VOC21VOC20PC60PC59ObjectStuffADE평균 mIoU지연시간 (ms/img)파라미터NACLIP (baseline)58.8979.7132.2035.1933.1523.3017.4239.9842.97—ScopeCLIP (Hiera-L)72.0787.1137.9141.0139.7926.4618.9346.18128.87224.4MScopeCLIP (Hiera-Tiny)68.1183.4636.3239.3236.8725.2618.1143.92100.7638.9M
 
-### Patents
 
-| Title | Applicant | Inventors | Status |
-|---|---|---|---|
-| 경량 분할 백본 기반 영역 마스크를 이용한 학습 불요 개방형 어휘 의미론적 영상 분할 방법 및 장치 | 성균관대학교 산학협력단 | 정종필, 김정훈, **신재호**, 김규리, 임서연 | Pending (Ref: R-2026-0537-KR-1) |
-
-### Software Copyright
-
-| Title | Creators | Created | Status |
-|---|---|---|---|
-| 경량SAM2백본기반학습불요개방어휘의미론적분할소프트웨어 | 정종필, 김정훈, **신재호**, 임서연, 김규리 | 2026-06-08 | Registration pending |
+SR·MC 통합(Hiera-L)으로 평균 mIoU +6.20 향상 (베이스라인 대비 +15.5%)
+객체 중심 벤치마크에서 향상 두드러짐: VOC21 +13.18, COCO-Object +6.64
+Hiera-Tiny: Hiera-L 대비 파라미터 약 5.8배 절감, 지연시간 약 22% 단축(−28ms/img), peak memory 약 0.35GB 감소, 평균 정확도 약 95% 유지
 
 ---
 
-## Projects
+## 연구논문
 
-### ScopeCLIP: Region-Mask Training-Free Open-Vocabulary Semantic Segmentation with Lightweight SAM2
-**SmartFactory Capstone Design 1, SKKU** &nbsp;`Mar 2026 – Jun 2026`
+### 팀 논문
 
-> Team SF13 | Advisor: Prof. Jeong Jongpil | Industry partner: Duplex
-
-- Built the SAM2 mask generation pipeline (automatic mask generator setup, patch grid conversion) and implemented Hiera-L / Hiera-Tiny backbone switching.
-- Integrated Scope Reconstruction (SR) — region-constrained attention masking in the final CLIP transformer block — and Map Correction (MC) into the NACLIP baseline to form the ScopeCLIP system.
-- Evaluated across 7 OVSS benchmarks (VOC20/21, PC59/60, COCO-Object/Stuff, ADE20K): ScopeCLIP (Hiera-L) achieves **46.18 avg mIoU** (+6.20 over NACLIP baseline); lightweight Hiera-Tiny reaches **43.92 mIoU** (95% of Hiera-L) with −22% latency and −0.35 GB peak memory.
-- Outcomes: ACCV 2026 paper submission, patent application, SW copyright registration.
-
-### U-Net-based Semantic Segmentation &nbsp;`(ICE-3056)`
-- Built a fully convolutional semantic segmentation model inspired by U-Net, using an encoder-bottleneck-decoder architecture for pixel-wise classification.
-- Designed convolutional encoder and transposed-convolution decoder blocks with BatchNorm and ReLU to capture semantic context and restore spatial resolution.
-- Combined Cross-Entropy Loss with Dice Loss to address class imbalance in under-represented segmentation classes.
-- Evaluated with 5-fold validation, achieving a best validation mAP of 0.874 and a test mAP of 0.754.
-
-### AI-Powered Emergency Support System &nbsp;`(SKT Fly AI 8th)`
-[www.aegis119.com](http://www.aegis119.com) *(closed)*
-- Designed a LangGraph-based multi-agent system with conditional routing, improving performance by 20% over baseline RAG.
-- Integrated LLM/SLM for cost-efficient inference and aligned workflow with KTAS triage logic.
-- Built and deployed containerized Spring/FastAPI services with CI/CD on AWS ECS.
-
-### Pregnancy Success Prediction Model &nbsp;`(LG Aimers 6th)`
-- Developed a classification model to predict pregnancy outcomes for infertility patients.
-- Applied multivariate imputation, normalization (StandardScaler), and ensemble learning (Random Forest, XGBoost, stacking).
-- Improved performance over single models, achieving a final ROC-AUC of ~0.75.
-
-### Smart Process Monitoring &nbsp;`(SKKU Capstone Project)`
-- Built an IoT monitoring system integrating sensor networks with MQTT-based data pipelines.
-- Designed real-time data storage and visualization using InfluxDB and Grafana.
-- Developed a real-time fire detection module by fine-tuning the FireNet deep neural network.
-
-### CV Lab Intern – 3D Map Project
-- Built a campus-scale feature map using Visual SLAM (ORB-SLAM3).
-- Improved robustness via IMU sensor fusion to address mapping discontinuities.
-- Resolved calibration and sensor integration issues using 3DoF transformations and ROS node implementation.
-
-### Autonav Lab Intern – ERP-42 Autonomous Driving System &nbsp;`(with MORAI)`
-- Contributed to decision and control modules for an autonomous driving system using ERP-42 in collaboration with MORAI.
-- Implemented path tracking using the Pure Pursuit algorithm and developed rule-based stopping logic for traffic lights and pedestrian scenarios.
-- Resolved coordinate system inconsistencies by converting LLA to ENU, enabling accurate simulation-based localization.
-
-### FPGA Analog Clock System &nbsp;`(ICE-2005)`
-- Implemented VGA display modules and contributed to main clock logic for a Verilog-based FPGA analog clock system.
-- Designed VGA timing and rendering logic to display an analog clock face with hour, minute, and second hands.
-- Integrated FPGA I/O features including DIP/PUSH switch-based time setting, speed scaling, LED time indication, piezo-buzzer alerts, and 7-segment display output.
-- Improved hardware interaction reliability by applying debouncing logic and modularizing the system into main clock, VGA, LED, buzzer, 7-segment, and top-level modules.
-
-### Driving Lift Robot &nbsp;`(ICE-3015)`
-- Developed a driving lift robot by integrating a custom H-Bridge motor driver, lift mechanism, and embedded control logic.
-- Designed the motor driver circuit from scratch without dedicated driver ICs, selecting NMOS/PMOS components based on voltage, current, and power constraints.
-- Implemented register-level motor control using timer/counter configuration and interrupt-based logic for precise operation.
-- Resolved hardware-software integration issues through datasheet analysis, circuit redesign, and systematic debugging.
-
-### Tambourine Expense Management App Backend &nbsp;`(UMC 5th)`
-- Developed backend services for "Tambourine," an expense management application, as a backend developer in the UMC 5th university club program.
-- Built RESTful APIs using Node.js and Express, applying a DTO-based structure to improve code consistency, maintainability, and request-response validation.
-- Designed the service database schema and ERD for core domains including users, categories, items, notifications, and search history, considering scalability and query efficiency.
-- Utilized AWS EC2 for backend server deployment and AWS S3 for file/static asset storage.
-
-### Real-time ADAS with YOLOv5 and Sensor Fusion &nbsp;`(ICE-4104)`
-- Adapted a COCO-pretrained YOLOv5 object detection model for Korean road environments by adding a custom water deer class through transfer learning.
-- Built a custom-labeled dataset with LabelImg and expanded the YOLOv5 detection label space from 80 COCO classes to 81 classes.
-- Optimized model training by tuning epochs, batch size, and optimizer settings, improving detection reliability for vehicles, pedestrians, and wildlife objects.
-- Developed a real-time ADAS prototype by combining YOLOv5 inference, Arduino serial communication, and ultrasonic sensor-based distance recognition to control motor speed according to detected hazards.
+| 제목 | 학회/저널 | 상태 |
+|------|-----------|------|
+| ScopeCLIP: Region-Mask Training-Free Open-Vocabulary Semantic Segmentation with Lightweight SAM2 | ACCV 2026 | 투고 예정 |
 
 ---
 
-## Skills
+## 연구성과
 
-| Category | Tools |
-|---|---|
-| Programming | C/C++, JavaScript, Python, Java |
-| AI / ML | PyTorch |
-| Backend | Express.js, Spring |
-| Frontend | React |
-| DevOps | Linux, AWS, CI/CD, Docker, Kubernetes |
-| Databases | MySQL, MongoDB, PostgreSQL |
+### 특허 출원
 
----
+<img width="1576" height="219" alt="13팀_SW신청 (1)" src="https://github.com/user-attachments/assets/18c1e140-8567-45ce-bab4-95d2ac215d26" />
 
-*Last updated: June 2026*
+### SW 저작권 등록
+
+<img width="740" height="613" alt="image" src="https://github.com/user-attachments/assets/81126f21-4a43-46b2-b3cf-9eb0a9bfb99c" />
+
