@@ -25,6 +25,7 @@
   - Hiera-L / Hiera-Tiny 백본 교체 구현
   - 마스크 합성(면적 우선), nearest 다운샘플로 패치별 영역 인덱스 부여
 
+
 **개요**  
 스마트팩토리 비전 검사 환경에서, 사전학습된 시각-언어 모델 CLIP을 추가 학습 없이 활용하여 자연어 텍스트로 임의 클래스를 지정하는 개방어휘 의미 분할(Open-Vocabulary Semantic Segmentation, OVSS) 시스템 ScopeCLIP을 구성하였다. CLIP 패치 특징의 inter-class correlation 문제를 SAM2 영역 마스크 기반의 두 연산으로 보완한다.
 
@@ -32,6 +33,7 @@
 - **Map Correction (MC)**: 풀해상도 예측맵에서 각 영역 내 화소 라벨을 최빈 라벨로 통일하여 고립 오분류 제거.
 
 마스크를 생성하는 SAM2 백본(Hiera-L vs. Hiera-Tiny)의 정확도–비용 trade-off를 7개 OVSS 벤치마크에서 정량 분석하여, 경량 백본의 현장 적용 가능성을 검증하였다.
+
 
 **개발 환경**
 
@@ -42,6 +44,7 @@
 | Framework | Python, PyTorch, mmsegmentation |
 | 데이터셋 | 공개 OVSS 벤치마크 7종 (VOC20/21, PC59/60, COCO-Object/Stuff, ADE20K) |
 | 마스크 생성 | points_per_side=8, pred-IoU·stability threshold=0.4, FP16, 마스크 병합 미사용 |
+
 
 **정량 결과**
 
